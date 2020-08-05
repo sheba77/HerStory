@@ -10,7 +10,8 @@ bigData- in this file I placed all data and algorithms concerning data extractio
 	in this file I hold the information as a dictionary with the keys: "book name", "author name", 
 	"book data" and "author data".
 	
-	smalldata - same as data but but inly for introduction to philosophy books (a small amount of books out of all the oned downloaded)
+	smalldata - same as data but but inly for introduction to philosophy books (a small amount of
+	 books out of all the oned downloaded)
 	
 	html - a list of downloaded html links, each one is the web page of the title represented.
 	
