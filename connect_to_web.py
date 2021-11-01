@@ -5,31 +5,41 @@ import os
 
 print('>>>' + __name__)
 app = Flask(__name__)
+dir_name = os.path.dirname(__file__)
 
 @app.route('/')
 def main_html():
     return send_from_directory('templates', 'main.html')
 
-
+##
+# This function gets called at start up of the local web page, and takes all the books
+# we can choose from and places them into a jason file to read from
+##
 @app.route('/books',  methods=['GET'])
 def get_books():
-    with open(r"C:\Users\b_sch\PycharmProjects\HerStory\all_books_dict") as json_file:
+    file_name = os.path.join(dir_name, "all_books_dict")
+    with open(file_name) as json_file:
         books = json.load(json_file)
     return json.dumps(books)
 
 
+##
+# creates a path to the wanted book, calls on words_2_vec class to train and create the
+# model and then receives the results which is a tuple of percentage and a boolean of
+# if the book is feminist or not.
+##
 @app.route('/books',  methods=['POST'])
 def check_book():
     book_path_string = request.data
-    print(book_path_string)
     book_name = str(book_path_string).split(os.sep)[-1].strip("'")
-    new_book_path_string = os.path.join(r"C:\Users\b_sch\PycharmProjects\HerStory\book2try", book_name)
-    #book_path = os.path.normpath(new_book_path_string)
-    per, fem = words_2_vec.out_side_test(new_book_path_string)
+    book_path = os.path.join(dir_name, "book2try", book_name)
+    per, fem = words_2_vec.out_side_test(book_path)
     result = {"percentage": per, "is_feminist": fem.item()}
     return json.dumps(result)
 
-
+##
+# send file to show on local web page
+##
 @app.route('/css/index.css')
 def send_css():
     return send_from_directory(r'static\css', 'index.css')
