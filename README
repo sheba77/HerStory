@@ -1,49 +1,25 @@
+Batsheva Schiff
+
 =============================
-=      File description     =
+=      Files description     =
 =============================
-run main.py to see finished results 
-background+photo - the photoes used for the background of this project
+The idea behind this project is to suggest a way to test if a book 
+is "feminist" or not. The script will compare a chosen book with 
+a predefined list of books that have been mark previously as "feminist" or
+not and return the percentage of similarity between the gender based nouns in 
+the chosen book and the marked books. 
 
-bigData- in this file I placed all data and algorithms concerning data extraction:
+so how do we do this?
+we use the free books from www.gutenberg.org 
+ahead of time we dived most books into feminist and not based on public decision.
+Then we create a dict for each book that holds all the nouns 
+that come ofter she/he for both the feminist books and the 
+not feminist books.
+we then use k-nearest neighbor algorithm to place any new book 
+(also based on the nouns we find inside it)
 
-	data - a file that conatains all titles downloaded, each book represented as .JSON file
-	in this file I hold the information as a dictionary with the keys: "book name", "author name", 
-	"book data" and "author data".
-	
-	smalldata - same as data but but inly for introduction to philosophy books (a small amount of
-	 books out of all the oned downloaded)
-	
-	html - a list of downloaded html links, each one is the web page of the title represented.
-	
-	html-intro - downloaded html pages of books, these represent an introduction to philosophy
-	book a.k.a starting node.
-	
-	introductionLinks.txt- the web adress of the introduction to philosophy books I downloded.
-	
-	linksforall.txt - the web adress of all the philosophy books.
-	
-	link_download.py- a small algorithm that given a file with html links will create a file 
-	of downloaded html pages of the linkes given.
 
-book.ico- the book icon for the project
+list of python scripts:
+links - links of free books from www.gutenberg.org 
 
-final_graph.json - once the graph is created I export that data. Because that the graph is static, 
-so there is no reason to recreate the graph everytime the algorithm is run.
-
-main.py- part of the gui that is used in the algorithm.
-
-html_extractor - a small function that iterates over downloaded webpages and gathers data in a 
-specific format.
-
-my_term.py - a list of all the philospical terms we use in the algorithm.
-
-network_x_graph.py- this is the file,that given all that data, will create the actual graph.
-it has many function- run dijkstra, find the closest intro book, all weight calculations are done in this file.
-
-after_run.py - this is the function to use to run all the algorithm. 
-			this file connects the gui with the program, the way it runs: 
-			first it opens the gui and let sthe user look for the book that they want 
-			to read, once chosen the algorithm will find the closest intro book and then create 
-			a list of books (nodes) such that the path between the intro book found and the book
-			chosen is the shorsest. once found it will display this data on the gui and 
-			then the user can click any book to go to the weg page of this book.
+getbooks.py - 
