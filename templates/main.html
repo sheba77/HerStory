@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" href="/css/index.css">
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+    <h1 class="title">HerStory</h1>
+    <h2 class="subtitle" >reading with gender awareness</h2>
+    <button class="btn" onclick="window.open('https://www.goodreads.com/list/show/62.Best_Feminist_Books','_blank')"> Book List</button>
+    <div class="select-container">
+      <select ng-model="selected_path" ng-change="calculate_things()" ng-focus="reset_screen()">
+          <option value="" >Choose a book:</option>
+          <option ng-repeat="(bookname, bookpath) in books" ng-value="bookpath">{{ bookname }}</option>
+      </select>
+    </div>
+    <div class="placeholder"></div>
+    <div id="logo">
+      <span class="speedometer" st></span>
+      <span class="needle" ng-style="needleRotation"></span>
+    </div>
+    <div ng-if="has_results">
+        <div class="percentage">This book is {{ percentage }}% similar to other feminist books </div>
+        <div class="result-message" ng-if="is_feminist">This Story is gender equal, enjoy!</div>
+        <div class="result-message" ng-if="!is_feminist">Oh no! This Story is not gender equal</div>
+    </div>
+</div>
+</body>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+  $scope.selected_path = '';
+  $scope.is_feminist = false;
+  $scope.percentage = 0;
+  $scope.has_results = false;
+  $scope.needleRotation = {transform: 'rotate(-90deg)'};
+  $scope.calculate_things = function() {
+      $http.post("/books", $scope.selected_path)
+      .then(function(response) {
+        $scope.is_feminist = response.data.is_feminist;
+        $scope.percentage = Math.round(response.data.percentage * 100);
+        const percentToAngle = (180 * $scope.percentage) / 100 - 90;
+        $scope.needleRotation = {transform: `rotate(${percentToAngle}deg)`};
+        $scope.has_results = true;
+        document.querySelector('select').blur(); // remove focus from the select to reset it on next focus
+      });
+  }
+  $scope.reset_screen = function() {
+    $scope.needleRotation = {transform: 'rotate(-90deg)'};
+    $scope.has_results = false;
+  }
+
+  $http.get("/books")
+  .then(function(response) {
+    $scope.books = response.data;
+  });
+});
+</script>
+</html>

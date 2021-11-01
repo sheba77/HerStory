@@ -1,0 +1,114 @@
+html {
+  background-image: url(img/bg.jpeg);
+  background-position-y: -54px;
+  background-position-x: -296px;
+  font-family: monospace;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+h1.title {
+    align-items: center;
+    font-size: 132px;
+    text-align: center;
+}
+h2.subtitle {
+    align-items: center;
+    text-align: center;
+    margin-top: -107px;
+    margin-left: -140px;
+    font-style: oblique;
+    font-size: 35px
+}
+button.btn {
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    padding: 12px 40px;
+    border-radius: 12px;
+    font-size: 16px;
+    background-color: transparent;
+    color: black;
+    font-size: medium;
+    font-weight: bold;
+}
+
+div.select-container {
+    width: 74%;
+    margin: 0 auto;
+}
+
+select{
+    height: 38px;
+    width: 100%;
+    color: gray;
+    font-size: 21px;
+    font-family: monospace;
+    font-style: italic;
+}
+
+div.percentage {
+    align-items: center;
+    text-align: center;
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 35px;
+    position: relative;
+    bottom: 119px;
+    left: -14px;
+}
+
+div.result-message{
+    align-items: center;
+    text-align: center;
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 35px;
+    position: relative;
+    bottom: 112px
+
+}
+
+#logo {
+    width: 200px;
+    position: relative;
+    margin: 25px auto 0;
+
+}
+
+#logo .speedometer {
+  position: relative;
+  right: 73px;
+  top: 10px;
+  width: 240px;
+  height: 240px;
+  border-width: 43px;
+  border-radius: 100%;
+  border: 40px solid #ea7e7e;;
+  border-right: 40px solid #ffffff00;
+  border-bottom: 40px solid #ffffff00;
+  border-style: ridge;
+  -webkit-transform: rotate(45deg);
+  display: inline-block;
+}
+
+#logo .needle {
+  width: 15px;
+  height: 130px;
+  background: #999999;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 100%;
+  border-top-right-radius: 100%;
+  display: inline-block;
+  left: 83px;
+  position: absolute;
+  top: 51px;
+  transition: transform 3s ease-in-out;
+  transform: rotate(-90deg);
+  transform-origin: bottom;
+}
